@@ -26,3 +26,5 @@ Run the app
 The main component of the app is defined in `src/components/WeatherReport.jsx`. This component stores the state for the weather report being fetched from the endpoint and renders it using the `WeatherDetails` component.
 
 The weather details being rendered can be dynamically changed by passing information to the `LocationForm` component. Upon pressing the `Get Weather Report` button, this component takes the values entered `InputControls` and uses them to make an axios get request to the server. A successful response sets the state of the parent component to the newly fetched data.
+
+TailwindCSS and DaisyUI were used to style the application.

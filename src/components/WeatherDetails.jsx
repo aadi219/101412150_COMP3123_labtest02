@@ -7,7 +7,7 @@ const WeatherDetails = ({weather}) => {
   return (
     <div className='flex flex-col gap-4 h-96 justify-center border rounded-lg border-slate-400 p-8'>
         <div className='my-4'>
-            <p className='text-xl'>Weather for - {weather.name}</p>
+            <p className='text-xl'>Weather for - <b>{weather.name}</b></p>
         </div>
         <div className='flex w-full justify-center gap-3'>
             <p className='text-8xl text-center text-amber-500'>{tempCelsius}°C</p>

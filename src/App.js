@@ -1,16 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import LocationForm from './components/LocationForm';
+import ApiContext from './client/ApiContext';
+import WeatherReport from './components/WeatherReport';
 
-
-const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY);
 
 function App() {
   return (
-    <>
-      <LocationForm apiKey={API_KEY} />
-    </>
+      <div className='flex justify-center flex-col items-center p-8'>
+        <WeatherReport />
+      </div>
   );
 }
 

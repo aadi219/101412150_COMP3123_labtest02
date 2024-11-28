@@ -5,6 +5,11 @@ import ApiContext from '../client/ApiContext';
 import WeatherDetails from './WeatherDetails';
 
 
+/*
+    This is the main component encapsulating functionalities of the application.
+    If weather report is set, renders the WeatherDetails component
+    Renders the LocationForm component to allow user to dynamically fetch weather details.
+*/
 const WeatherReport = () => {
 
     let [weatherReport, setWeatherReport] = useState(null);

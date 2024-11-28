@@ -1,5 +1,13 @@
 import React from 'react'
 
+/*
+    Component contains rendering and styling for weather info fetched from the API
+    takes in the fetched weather report object as props
+    Displays: Temperature & Feels Like (in celsius)
+    Name of City for which data is fetched
+    Text description of weather.
+*/
+
 const WeatherDetails = ({weather}) => {
 
     let tempCelsius = Math.round((weather.main.temp - 273.15) * 100) / 100;

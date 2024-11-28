@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import InputControl from './InputControl'
 import axios from 'axios';
-import { geoClient } from '../client/Client';
+import { geoClient, weatherClient } from '../client/Client';
+import ApiContext from '../client/ApiContext';
 
 
 
-const LocationForm = ({apiKey}) => {
+const LocationForm = ({setWeather}) => {
 
-    let [city, setCity] = useState('');
-    let [state, setState] = useState('');
-    let [country, setCountry] = useState('');
-    let [location, setLocation] = useState();
+    const apiKey = useContext(ApiContext);
+
+    let [city, setCity] = useState('Toronto');
+    let [country, setCountry] = useState('ca');
 
     const handleInputChange = (e, setState) => {
         e.preventDefault();
         setState(e.target.value);
     }
 
-    const getLocationData = async (city, state, country) => {
+    const getLocationData = async (city, country) => {
         try {
-            const response = await geoClient.get('/direct', {
+            const response = await weatherClient.get('', {
                 params: {
-                    q: `${city},${state},${country}`,
-                    limit: 1,
+                    q: `${city},${country}`,
                     appid: apiKey
                 }
             });
-            setLocation(response.data);
+            return response.data;
         } catch(error) {
             console.error(error);
         }
@@ -34,15 +34,14 @@ const LocationForm = ({apiKey}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        getLocationData(city, state, country).then(() => {
-            console.log(location);
+        getLocationData(city, country.toLowerCase()).then((report) => {
+            setWeather(report);
         })
     }
 
   return (
-    <form onSubmit={handleSubmit} className='flex justify-around bg-slate-500 w-full py-2'>
+    <form onSubmit={handleSubmit} className='flex justify-around bg-slate-500 w-full gap-2 p-5 rounded'>
         <InputControl placeholder={'City'} handleChange={(e) => {handleInputChange(e, setCity)}} />
-        <InputControl placeholder={'State'} handleChange={(e) => {handleInputChange(e, setState)}} />
         <InputControl placeholder={'Country Code'} handleChange={(e) => {handleInputChange(e, setCountry)}} />
         <button type="submit" className='btn btn-primary'>Get Weather Report</button>
     </form>
